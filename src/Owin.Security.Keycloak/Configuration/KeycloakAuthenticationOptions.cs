@@ -1,5 +1,5 @@
 ﻿using System;
-using Psy.KeycloakIdentityModel.Models.Configuration;
+using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
 using Microsoft.Owin.Security;
 
 namespace Psy.Owin.Security.Keycloak

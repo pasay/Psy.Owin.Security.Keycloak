@@ -71,6 +71,9 @@
     <Reference Include="Microsoft.IdentityModel.Logging, Version=6.11.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.11.1\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.40306.1554, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.4.403061554\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.11.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.11.1\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
@@ -100,6 +103,29 @@
     <Compile Include="Configuration\KeycloakAuthenticationOptions.cs" />
     <Compile Include="Extensions\AppBuilderExtension.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="IdentityModel\Constants.cs" />
+    <Compile Include="IdentityModel\ErrorMessages.cs" />
+    <Compile Include="IdentityModel\Extensions\DateTimeExtension.cs" />
+    <Compile Include="IdentityModel\Extensions\JwtSecurityTokenExtension.cs" />
+    <Compile Include="IdentityModel\Global.cs" />
+    <Compile Include="IdentityModel\KeycloakIdentity.cs" />
+    <Compile Include="IdentityModel\Models\Configuration\DefaultKeycloakParameters.cs" />
+    <Compile Include="IdentityModel\Models\Configuration\IKeycloakSettings.cs" />
+    <Compile Include="IdentityModel\Models\Messages\GenericMessage.cs" />
+    <Compile Include="IdentityModel\Models\Messages\RefreshAccessTokenMessage.cs" />
+    <Compile Include="IdentityModel\Models\Messages\RequestAccessTokenMessage.cs" />
+    <Compile Include="IdentityModel\Models\Responses\AuthorizationResponse.cs" />
+    <Compile Include="IdentityModel\Models\Responses\OidcResponse.cs" />
+    <Compile Include="IdentityModel\Models\Responses\TokenResponse.cs" />
+    <Compile Include="IdentityModel\Utilities\Caching\Cache.cs" />
+    <Compile Include="IdentityModel\Utilities\Caching\StateCache.cs" />
+    <Compile Include="IdentityModel\Utilities\ClaimMapping\ClaimLookup.cs" />
+    <Compile Include="IdentityModel\Utilities\ClaimMapping\ClaimMappings.cs" />
+    <Compile Include="IdentityModel\Utilities\KeycloakTokenHandler.cs" />
+    <Compile Include="IdentityModel\Utilities\OidcDataManager.cs" />
+    <Compile Include="IdentityModel\Utilities\Synchronization\ReaderGuard.cs" />
+    <Compile Include="IdentityModel\Utilities\Synchronization\UpgradeableGuard.cs" />
+    <Compile Include="IdentityModel\Utilities\Synchronization\WriterGuard.cs" />
     <Compile Include="Middleware\KeycloakAuthenticationHandler.cs" />
     <Compile Include="Middleware\KeycloakAuthenticationMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,12 +146,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\KeycloakIdentityModel\Psy.KeycloakIdentityModel.csproj">
-      <Project>{fa6dddd7-366a-4012-acf2-252c599f80c0}</Project>
-      <Name>Psy.KeycloakIdentityModel</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

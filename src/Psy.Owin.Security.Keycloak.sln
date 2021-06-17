@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psy.Owin.Security.Keycloak", "Owin.Security.Keycloak\Psy.Owin.Security.Keycloak.csproj", "{16EDD97E-727A-4366-BF79-629295A162D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psy.KeycloakIdentityModel", "KeycloakIdentityModel\Psy.KeycloakIdentityModel.csproj", "{FA6DDDD7-366A-4012-ACF2-252C599F80C0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,12 +18,6 @@ Global
 		{16EDD97E-727A-4366-BF79-629295A162D1}.Final|Any CPU.Build.0 = Final|Any CPU
 		{16EDD97E-727A-4366-BF79-629295A162D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16EDD97E-727A-4366-BF79-629295A162D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FA6DDDD7-366A-4012-ACF2-252C599F80C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FA6DDDD7-366A-4012-ACF2-252C599F80C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FA6DDDD7-366A-4012-ACF2-252C599F80C0}.Final|Any CPU.ActiveCfg = Final|Any CPU
-		{FA6DDDD7-366A-4012-ACF2-252C599F80C0}.Final|Any CPU.Build.0 = Final|Any CPU
-		{FA6DDDD7-366A-4012-ACF2-252C599F80C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FA6DDDD7-366A-4012-ACF2-252C599F80C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

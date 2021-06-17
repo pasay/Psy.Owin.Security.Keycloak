@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
-using Psy.KeycloakIdentityModel;
-using Psy.KeycloakIdentityModel.Utilities.Caching;
+using Psy.Owin.Security.Keycloak.IdentityModel;
+using Psy.Owin.Security.Keycloak.IdentityModel.Utilities.Caching;
 
 namespace Psy.Owin.Security.Keycloak
 {
