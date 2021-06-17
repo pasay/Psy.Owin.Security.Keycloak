@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="ErrorMessages.cs" />
     <Compile Include="Models\Configuration\DefaultKeycloakParameters.cs" />
     <Compile Include="Models\Configuration\IKeycloakSettings.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
