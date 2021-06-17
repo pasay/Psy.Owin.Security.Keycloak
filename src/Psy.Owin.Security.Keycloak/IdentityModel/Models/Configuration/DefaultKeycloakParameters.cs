@@ -130,5 +130,6 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration
 
         public string CallbackPath { get; set; }
         public string ResponseType { get; set; }
+        public bool EnableWebApiMode { get; set; }
     }
 }

@@ -21,5 +21,6 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration
         TimeSpan MetadataRefreshInterval { get; }
         string CallbackPath { get; }
         string ResponseType { get; }
+        bool EnableWebApiMode { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 
-namespace SampleKeycloakApp.Controllers
+namespace Psy.Owin.Security.Keycloak.Samples.Controllers
 {
     public class HomeController : Controller
     {

@@ -250,7 +250,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel
             {
                 await kcIdentity.CopyFromJwt(accessToken, refreshToken, idToken);
             }
-            catch (SecurityTokenExpiredException)
+            catch (SecurityTokenExpiredException) when (!parameters.EnableWebApiMode)
             {
                 // Load new identity from token endpoint via refresh token (if possible)
                 await kcIdentity.RefreshIdentity(refreshToken);
@@ -444,7 +444,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel
             try
             {
                 // Check to update cached claims, but not if refresh token is missing (as in bearer mode)
-                if ((_kcClaims == null || _accessToken.ValidTo <= DateTime.UtcNow) && _refreshToken != null)
+				if ((_kcClaims == null || _accessToken.ValidTo <= DateTime.UtcNow) && _refreshToken != null && !_parameters.EnableWebApiMode)
                 {
                     // Validate refresh token expiration
                     if (_refreshToken.ValidTo <= DateTime.UtcNow)

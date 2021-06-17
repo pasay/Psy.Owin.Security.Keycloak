@@ -3,12 +3,12 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using Psy.Owin.Security.Keycloak;
-using SampleKeycloakApp;
+using Psy.Owin.Security.Keycloak.Samples;
 using System;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace SampleKeycloakApp
+namespace Psy.Owin.Security.Keycloak.Samples
 {
     public class Startup
     {
@@ -31,6 +31,7 @@ namespace SampleKeycloakApp
                 ClientId = "sample_keycloakAuth", //your client id
                 ClientSecret = "3a06aae9-53d2-43a9-ba00-f188ff7b6d99", //your client secret
                 KeycloakUrl = "http://keycloak.site.com/auth", // your keycloak url adress
+
                 SignInAsAuthenticationType = persistentAuthType,
                 AuthenticationType = persistentAuthType,
 

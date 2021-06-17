@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace SampleKeycloakApp
+namespace Psy.Owin.Security.Keycloak.Samples
 {
     public class FilterConfig
     {

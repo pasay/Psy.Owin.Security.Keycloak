@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace SampleKeycloakApp
+namespace Psy.Owin.Security.Keycloak.Samples
 {
     public class RouteConfig
     {
