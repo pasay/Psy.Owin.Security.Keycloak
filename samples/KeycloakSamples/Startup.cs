@@ -2,8 +2,9 @@
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using Owin.Security.Keycloak;
+using Psy.Owin.Security.Keycloak;
 using SampleKeycloakApp;
+using System;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -26,11 +27,20 @@ namespace SampleKeycloakApp
 
             app.UseKeycloakAuthentication(new KeycloakAuthenticationOptions
             {
-                Realm = "master",
-                ClientId = "sample_keycloakAuth",
-                ClientSecret = "3a06aae9-53d2-43a9-ba00-f188ff7b6d99",
-                KeycloakUrl = "http://keycloak.site.com/auth",
-                SignInAsAuthenticationType = persistentAuthType // Not required with SetDefaultSignInAsAuthenticationType
+                //Realm = "master",
+                //ClientId = "sample_keycloakAuth",
+                //ClientSecret = "3a06aae9-53d2-43a9-ba00-f188ff7b6d99",
+                //KeycloakUrl = "http://keycloak.site.com/auth",
+                //SignInAsAuthenticationType = persistentAuthType // Not required with SetDefaultSignInAsAuthenticationType
+
+                AuthenticationType = persistentAuthType, // Unique identifier for the auth middleware
+                //AllowUnsignedTokens = true,
+                //DisableIssuerSigningKeyValidation = false,
+                //DisableIssuerValidation = true,
+                //DisableAudienceValidation = true,
+                DisableTokenSignatureValidation = true,
+                TokenClockSkew = TimeSpan.FromSeconds(2),
+                SignInAsAuthenticationType = persistentAuthType,
             });
         }
     }

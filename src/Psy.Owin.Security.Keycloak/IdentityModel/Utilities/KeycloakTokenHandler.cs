@@ -66,7 +66,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
                 RequireSignedTokens = !options.AllowUnsignedTokens,
                 ValidIssuer = uriManager.GetIssuer(),
                 ClockSkew = options.TokenClockSkew,
-                ValidAudiences = new List<string> { "null", options.ClientId },
+                ValidAudiences = new List<string> { "null", "account", options.ClientId },
                 IssuerSigningKeys = uriManager.GetJsonWebKeys().GetSigningKeys(),
                 AuthenticationType = options.AuthenticationType // Not used
             };
@@ -107,16 +107,24 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
 
             if (securityToken.Length > MaximumTokenSizeInBytes)
             {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, ErrorMessages.IDX10209,
-                    securityToken.Length, MaximumTokenSizeInBytes));
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, ErrorMessages.IDX10209, securityToken.Length, MaximumTokenSizeInBytes));
             }
 
-            if (validationParameters.ValidateIssuerSigningKey == false)
+            JwtSecurityToken jwt = null;
+            try
             {
-                return ReadToken(securityToken);
+                jwt = ValidateSignature(securityToken, validationParameters);
             }
+            catch (Exception ex)
+            {
+                // HS256 algorithm error handle
+                if (validationParameters.ValidateIssuerSigningKey)
+                {
+                    throw ex;
+                }
 
-            var jwt = ValidateSignature(securityToken, validationParameters);
+                jwt = ReadToken(securityToken) as JwtSecurityToken;
+            }
 
             if (jwt.SigningKey != null)
             {
@@ -142,8 +150,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
                 {
                     if (!validationParameters.LifetimeValidator(notBefore, expires, jwt, validationParameters))
                     {
-                        throw new SecurityTokenInvalidLifetimeException(string.Format(CultureInfo.InvariantCulture,
-                            ErrorMessages.IDX10230, jwt));
+                        throw new SecurityTokenInvalidLifetimeException(string.Format(CultureInfo.InvariantCulture, ErrorMessages.IDX10230, jwt));
                     }
                 }
                 else
@@ -152,14 +159,13 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
                 }
             }
 
-            if (validationParameters.ValidateAudience)
+            if (validationParameters.ValidateAudience && jwt.SignatureAlgorithm != "HS256")
             {
                 if (validationParameters.AudienceValidator != null)
                 {
                     if (!validationParameters.AudienceValidator(jwt.Audiences, jwt, validationParameters))
                     {
-                        throw new SecurityTokenInvalidAudienceException(string.Format(CultureInfo.InvariantCulture,
-                            ErrorMessages.IDX10231, jwt));
+                        throw new SecurityTokenInvalidAudienceException(string.Format(CultureInfo.InvariantCulture, ErrorMessages.IDX10231, jwt));
                     }
                 }
                 else
