@@ -1,4 +1,4 @@
-﻿namespace KeycloakIdentityModel
+﻿namespace Psy.KeycloakIdentityModel
 {
     public static class Constants
     {

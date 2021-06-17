@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Keycloak Identity Model")]
 [assembly: AssemblyDescription("Identity Model and Helpers for JBoss Keycloak Authentication Integration")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Redhat")]
-[assembly: AssemblyProduct("JBoss Keycloak")]
-[assembly: AssemblyCopyright("Copyright © 2016")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("JBoss Keycloak Forked Pasa YAZICI")]
+[assembly: AssemblyCopyright("Copyright © 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

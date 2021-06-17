@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeycloakIdentityModel.Extensions
+namespace Psy.KeycloakIdentityModel.Extensions
 {
     internal static class DateTimeExtension
     {

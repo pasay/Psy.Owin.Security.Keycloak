@@ -3,9 +3,9 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Authentication;
 using System.Threading.Tasks;
-using KeycloakIdentityModel.Models.Configuration;
+using Psy.KeycloakIdentityModel.Models.Configuration;
 
-namespace KeycloakIdentityModel.Models.Messages
+namespace Psy.KeycloakIdentityModel.Models.Messages
 {
     public abstract class GenericMessage<T>
     {

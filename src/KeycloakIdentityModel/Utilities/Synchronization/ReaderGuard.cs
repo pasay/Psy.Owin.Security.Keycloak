@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace KeycloakIdentityModel.Utilities.Synchronization
+namespace Psy.KeycloakIdentityModel.Utilities.Synchronization
 {
     public class ReaderGuard : IDisposable
     {

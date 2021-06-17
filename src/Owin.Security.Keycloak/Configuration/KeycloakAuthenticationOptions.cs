@@ -1,8 +1,8 @@
 ﻿using System;
-using KeycloakIdentityModel.Models.Configuration;
+using Psy.KeycloakIdentityModel.Models.Configuration;
 using Microsoft.Owin.Security;
 
-namespace Owin.Security.Keycloak
+namespace Psy.Owin.Security.Keycloak
 {
     public class KeycloakAuthenticationOptions : AuthenticationOptions, IKeycloakParameters
     {

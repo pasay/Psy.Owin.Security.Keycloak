@@ -1,6 +1,7 @@
-﻿using Owin.Security.Keycloak.Middleware;
+﻿using Psy.Owin.Security.Keycloak.Middleware;
+using Owin;
 
-namespace Owin.Security.Keycloak
+namespace Psy.Owin.Security.Keycloak
 {
     public static class AppBuilderExtension
     {

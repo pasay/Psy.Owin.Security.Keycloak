@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace KeycloakIdentityModel
+namespace Psy.KeycloakIdentityModel
 {
     public static class Global
     {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
-using KeycloakIdentityModel.Extensions;
+using Psy.KeycloakIdentityModel.Extensions;
 using Newtonsoft.Json.Linq;
 
-namespace KeycloakIdentityModel.Utilities.ClaimMapping
+namespace Psy.KeycloakIdentityModel.Utilities.ClaimMapping
 {
     internal static class ClaimMappings
     {

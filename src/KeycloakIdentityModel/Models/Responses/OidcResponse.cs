@@ -2,7 +2,7 @@
 using System.Collections.Specialized;
 using Microsoft.IdentityModel.Protocols;
 
-namespace KeycloakIdentityModel.Models.Responses
+namespace Psy.KeycloakIdentityModel.Models.Responses
 {
     public abstract class OidcResponse
     {

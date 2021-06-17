@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KeycloakIdentityModel.Models.Configuration
+namespace Psy.KeycloakIdentityModel.Models.Configuration
 {
     public interface IKeycloakParameters
     {

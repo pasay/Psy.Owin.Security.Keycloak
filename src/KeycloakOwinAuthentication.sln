@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owin.Security.Keycloak", "Owin.Security.Keycloak\Owin.Security.Keycloak.csproj", "{16EDD97E-727A-4366-BF79-629295A162D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psy.Owin.Security.Keycloak", "Owin.Security.Keycloak\Psy.Owin.Security.Keycloak.csproj", "{16EDD97E-727A-4366-BF79-629295A162D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeycloakIdentityModel", "KeycloakIdentityModel\KeycloakIdentityModel.csproj", "{FA6DDDD7-366A-4012-ACF2-252C599F80C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Psy.KeycloakIdentityModel", "KeycloakIdentityModel\Psy.KeycloakIdentityModel.csproj", "{FA6DDDD7-366A-4012-ACF2-252C599F80C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,5 +29,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {67BBC34C-1616-4C0C-A061-D150FF0AA5DD}
 	EndGlobalSection
 EndGlobal

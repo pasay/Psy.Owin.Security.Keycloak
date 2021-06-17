@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
-using KeycloakIdentityModel;
-using KeycloakIdentityModel.Utilities.Caching;
+using Psy.KeycloakIdentityModel;
+using Psy.KeycloakIdentityModel.Utilities.Caching;
 
-namespace Owin.Security.Keycloak
+namespace Psy.Owin.Security.Keycloak
 {
     internal static class Global
     {

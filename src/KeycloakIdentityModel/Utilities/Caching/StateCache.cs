@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace KeycloakIdentityModel.Utilities.Caching
+namespace Psy.KeycloakIdentityModel.Utilities.Caching
 {
     public class StateCache : Cache
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using Newtonsoft.Json.Linq;
 
-namespace KeycloakIdentityModel.Utilities.ClaimMapping
+namespace Psy.KeycloakIdentityModel.Utilities.ClaimMapping
 {
     internal class ClaimLookup
     {
@@ -34,10 +34,10 @@ namespace KeycloakIdentityModel.Utilities.ClaimMapping
                     break;
 
                 case JTokenType.Object:
-                    foreach (
-                        var claim in
-                            ((JObject) jsonToken).Children().SelectMany(GenerateClaims))
-                        yield return claim;
+                    foreach (var claim in ((JObject) jsonToken).Children().SelectMany(GenerateClaims))
+                    {    
+                    	yield return claim;
+                    }	
                     break;
 
                 default:

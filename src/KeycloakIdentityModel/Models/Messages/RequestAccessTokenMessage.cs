@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using KeycloakIdentityModel.Models.Configuration;
-using KeycloakIdentityModel.Models.Responses;
-using KeycloakIdentityModel.Utilities;
+using Psy.KeycloakIdentityModel.Models.Configuration;
+using Psy.KeycloakIdentityModel.Models.Responses;
+using Psy.KeycloakIdentityModel.Utilities;
 
-namespace KeycloakIdentityModel.Models.Messages
+namespace Psy.KeycloakIdentityModel.Models.Messages
 {
     public class RequestAccessTokenMessage : GenericMessage<TokenResponse>
     {

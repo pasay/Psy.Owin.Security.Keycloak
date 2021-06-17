@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Web;
 
-namespace KeycloakIdentityModel.Utilities.Caching
+namespace Psy.KeycloakIdentityModel.Utilities.Caching
 {
     public abstract class Cache
     {

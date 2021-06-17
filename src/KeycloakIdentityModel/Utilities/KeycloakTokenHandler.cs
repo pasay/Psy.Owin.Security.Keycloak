@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Psy.KeycloakIdentityModel.Models.Configuration;
+using Microsoft.IdentityModel;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http;
 using System.Threading.Tasks;
-using KeycloakIdentityModel.Models.Configuration;
-using Microsoft.IdentityModel;
 
-namespace KeycloakIdentityModel.Utilities
+namespace Psy.KeycloakIdentityModel.Utilities
 {
     internal class KeycloakTokenHandler : JwtSecurityTokenHandler
     {
@@ -33,7 +34,7 @@ namespace KeycloakIdentityModel.Utilities
                 throw new SecurityTokenValidationException("Remote Token Validation Failed");
             }
         }
-
+        
         public bool TryValidateToken(string jwt, IKeycloakParameters options, OidcDataManager uriManager, out SecurityToken rToken)
         {
             try
@@ -67,7 +68,7 @@ namespace KeycloakIdentityModel.Utilities
                 ValidIssuer = uriManager.GetIssuer(),
                 ClockSkew = options.TokenClockSkew,
                 ValidAudiences = new List<string> {"null", options.ClientId},
-                IssuerSigningTokens = uriManager.GetJsonWebKeys().GetSigningTokens(),
+                IssuerSigningKeys = uriManager.GetJsonWebKeys().GetSigningKeys(),
                 AuthenticationType = options.AuthenticationType // Not used
             };
 
@@ -110,6 +111,11 @@ namespace KeycloakIdentityModel.Utilities
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, ErrorMessages.IDX10209,
                     securityToken.Length, MaximumTokenSizeInBytes));
             }
+
+            if (validationParameters.ValidateIssuerSigningKey == false)
+            {
+				return ReadToken(securityToken);
+			}
 
             var jwt = ValidateSignature(securityToken, validationParameters);
 
