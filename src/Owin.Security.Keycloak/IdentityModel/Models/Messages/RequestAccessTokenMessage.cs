@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
+﻿using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
 using Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses;
 using Psy.Owin.Security.Keycloak.IdentityModel.Utilities;
+using System;
+using System.Threading.Tasks;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel.Models.Messages
 {

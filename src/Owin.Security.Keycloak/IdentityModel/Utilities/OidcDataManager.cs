@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
+using Psy.Owin.Security.Keycloak.IdentityModel.Utilities.Synchronization;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
-using Psy.Owin.Security.Keycloak.IdentityModel.Utilities.Synchronization;
 using Protocols = Microsoft.IdentityModel.Protocols;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
 {
@@ -147,9 +147,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
             catch (JsonReaderException exception)
             {
                 // Fail on invalid JSON
-                throw new Exception(
-                    $"RefreshMetadataAsync: Metadata address returned invalid JSON object ('{MetadataEndpoint}')",
-                    exception);
+                throw new Exception($"RefreshMetadataAsync: Metadata address returned invalid JSON object ('{MetadataEndpoint}')", exception);
             }
 
             // Set internal URI properties
@@ -187,8 +185,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
             catch (Exception exception)
             {
                 // Fail on invalid URI or metadata
-                throw new Exception(
-                    $"RefreshMetadataAsync: Metadata address returned incomplete data ('{MetadataEndpoint}')", exception);
+                throw new Exception($"RefreshMetadataAsync: Metadata address returned incomplete data ('{MetadataEndpoint}')", exception);
             }
         }
 
@@ -199,8 +196,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
 
             // Fail on unreachable destination
             if (!response.IsSuccessStatusCode)
-                throw new Exception(
-                    $"RefreshMetadataAsync: HTTP address unreachable ('{uri}')");
+                throw new Exception($"RefreshMetadataAsync: HTTP address unreachable ('{uri}')");
 
             return await response.Content.ReadAsStringAsync();
         }
@@ -290,7 +286,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
             {
                 parameters.Add(Protocols.OpenIdConnectParameterNames.ClientId, _options.ClientId);
 
-				//TODO: Check if control
+                //TODO: Check if control
                 if (!string.IsNullOrWhiteSpace(_options.ClientSecret))
                     parameters.Add(Protocols.OpenIdConnectParameterNames.ClientSecret, _options.ClientSecret);
             }

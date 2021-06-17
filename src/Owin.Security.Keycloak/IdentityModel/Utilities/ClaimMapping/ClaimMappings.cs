@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using Psy.Owin.Security.Keycloak.IdentityModel.Extensions;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Security.Claims;
-using Psy.Owin.Security.Keycloak.IdentityModel.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities.ClaimMapping
 {

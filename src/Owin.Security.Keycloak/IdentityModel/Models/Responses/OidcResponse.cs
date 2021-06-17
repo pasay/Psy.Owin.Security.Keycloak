@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Protocols;
+using System;
 using System.Collections.Specialized;
-using Microsoft.IdentityModel.Protocols;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses
 {
@@ -26,8 +26,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses
         {
             if (!IsSuccessfulResponse())
             {
-                throw new Exception(
-                    $"OIDC Error in AuthorizationResult [{Error}]: {ErrorDescription ?? "NO DESCRIPTION"} (URI: '{ErrorUri ?? "N/A"}')");
+                throw new Exception($"OIDC Error in AuthorizationResult [{Error}]: {ErrorDescription ?? "NO DESCRIPTION"} (URI: '{ErrorUri ?? "N/A"}')");
             }
         }
     }

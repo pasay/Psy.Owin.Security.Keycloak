@@ -19,7 +19,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Extensions
 
         public static DateTime ToDateTime(this long unixTimeStamp)
         {
-            return ToDateTime((double) unixTimeStamp);
+            return ToDateTime((double)unixTimeStamp);
         }
     }
 }

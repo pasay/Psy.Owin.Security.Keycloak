@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel.Extensions
 {

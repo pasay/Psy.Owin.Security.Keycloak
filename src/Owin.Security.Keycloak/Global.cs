@@ -1,7 +1,5 @@
-﻿using System.Collections.Concurrent;
-using System.Reflection;
-using Psy.Owin.Security.Keycloak.IdentityModel;
-using Psy.Owin.Security.Keycloak.IdentityModel.Utilities.Caching;
+﻿using Psy.Owin.Security.Keycloak.IdentityModel.Utilities.Caching;
+using System.Collections.Concurrent;
 
 namespace Psy.Owin.Security.Keycloak
 {
@@ -9,7 +7,6 @@ namespace Psy.Owin.Security.Keycloak
     {
         public static StateCache StateCache { get; } = new StateCache();
 
-        public static ConcurrentDictionary<string, KeycloakAuthenticationOptions> KeycloakOptionStore { get; } =
-            new ConcurrentDictionary<string, KeycloakAuthenticationOptions>();
+        public static ConcurrentDictionary<string, KeycloakAuthenticationOptions> KeycloakOptionStore { get; } = new ConcurrentDictionary<string, KeycloakAuthenticationOptions>();
     }
 }

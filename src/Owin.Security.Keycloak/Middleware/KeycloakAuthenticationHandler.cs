@@ -1,4 +1,10 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Infrastructure;
+using Psy.Owin.Security.Keycloak.IdentityModel;
+using Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IdentityModel;
@@ -7,12 +13,6 @@ using System.Net;
 using System.Security.Authentication;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.IdentityModel.Tokens;
-using Psy.Owin.Security.Keycloak.IdentityModel;
-using Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses;
-using Microsoft.Owin;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.Infrastructure;
 
 namespace Psy.Owin.Security.Keycloak.Middleware
 {
@@ -26,7 +26,7 @@ namespace Psy.Owin.Security.Keycloak.Middleware
                 // Try to authenticate via bearer token auth
                 if (Request.Headers.ContainsKey(Constants.BearerTokenHeader))
                 {
-                    var bearerAuthArr = Request.Headers[Constants.BearerTokenHeader].Trim().Split(new[] {' '}, 2);
+                    var bearerAuthArr = Request.Headers[Constants.BearerTokenHeader].Trim().Split(new[] { ' ' }, 2);
                     if ((bearerAuthArr.Length == 2) && bearerAuthArr[0].ToLowerInvariant() == "bearer")
                     {
                         try
@@ -129,7 +129,7 @@ namespace Psy.Owin.Security.Keycloak.Middleware
                 // If bearer token auth is forced, keep returned 401
                 if (Options.ForceBearerTokenAuth)
                 {
-                	//TODO: Check GenerateUnauthorizedResponseAsync
+                    //TODO: Check GenerateUnauthorizedResponseAsync
                     await GenerateUnauthorizedResponseAsync("Access Unauthorized: Requires valid bearer token authorization header");
                     return;
                 }
@@ -228,7 +228,7 @@ namespace Psy.Owin.Security.Keycloak.Middleware
             string reasonPhrase, string errorMessage)
         {
             // Generate error response
-            response.StatusCode = (int) statusCode;
+            response.StatusCode = (int)statusCode;
             response.ReasonPhrase = reasonPhrase;
             response.ContentType = "text/plain";
             var task = response.WriteAsync(errorMessage);

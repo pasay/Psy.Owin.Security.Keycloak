@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Protocols;
+using System;
 using System.Collections.Specialized;
 using System.Web;
-using Microsoft.IdentityModel.Protocols;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses
 {

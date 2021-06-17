@@ -1,6 +1,14 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
+using Psy.Owin.Security.Keycloak.IdentityModel.Extensions;
+using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
+using Psy.Owin.Security.Keycloak.IdentityModel.Models.Messages;
+using Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses;
+using Psy.Owin.Security.Keycloak.IdentityModel.Utilities;
+using Psy.Owin.Security.Keycloak.IdentityModel.Utilities.ClaimMapping;
+using System;
 using System.Collections.Generic;
-using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security;
@@ -8,14 +16,6 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using Psy.Owin.Security.Keycloak.IdentityModel.Extensions;
-using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
-using Psy.Owin.Security.Keycloak.IdentityModel.Models.Messages;
-using Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses;
-using Psy.Owin.Security.Keycloak.IdentityModel.Utilities;
-using Psy.Owin.Security.Keycloak.IdentityModel.Utilities.ClaimMapping;
-using Newtonsoft.Json.Linq;
-using System.IdentityModel.Tokens.Jwt;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel
 {
@@ -402,24 +402,24 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel
             var jsonId = _parameters.ClientId;
             if (_idToken != null)
             {
-		        var claims = ProcessOidcToken(idToken.GetPayloadJObject(), ClaimMappings.IdTokenMappings, jsonId);
+                var claims = ProcessOidcToken(idToken.GetPayloadJObject(), ClaimMappings.IdTokenMappings, jsonId);
                 foreach (var claim in claims)
                     yield return claim;
-			}
-			
+            }
+
             if (_accessToken != null)
             {
-            	var claims = ProcessOidcToken(accessToken.GetPayloadJObject(), ClaimMappings.AccessTokenMappings, jsonId);
+                var claims = ProcessOidcToken(accessToken.GetPayloadJObject(), ClaimMappings.AccessTokenMappings, jsonId);
                 foreach (var claim in claims)
                     yield return claim;
-			}
-			
+            }
+
             if (_refreshToken != null)
             {
-            	var claims = ProcessOidcToken(refreshToken.GetPayloadJObject(), ClaimMappings.RefreshTokenMappings, jsonId);
+                var claims = ProcessOidcToken(refreshToken.GetPayloadJObject(), ClaimMappings.RefreshTokenMappings, jsonId);
                 foreach (var claim in claims)
-                	yield return claim;
-			}            
+                    yield return claim;
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -494,11 +494,11 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel
 
             // Save to this object
             // TODO: Convert to MS claims parsing in token handler
-			_kcClaims = GenerateJwtClaims(
-			    accessSecurityToken as JwtSecurityToken,
-			    idSecurityToken as JwtSecurityToken,
-			    refreshSecurityToken as JwtSecurityToken
-			);
+            _kcClaims = GenerateJwtClaims(
+                accessSecurityToken as JwtSecurityToken,
+                idSecurityToken as JwtSecurityToken,
+                refreshSecurityToken as JwtSecurityToken
+            );
 
             _idToken = idSecurityToken as JwtSecurityToken;
             _accessToken = accessSecurityToken as JwtSecurityToken;

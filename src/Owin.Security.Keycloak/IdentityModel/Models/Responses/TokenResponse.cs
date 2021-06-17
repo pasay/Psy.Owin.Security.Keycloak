@@ -1,6 +1,6 @@
-﻿using System.Collections.Specialized;
-using Microsoft.IdentityModel.Protocols;
+﻿using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json.Linq;
+using System.Collections.Specialized;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel.Models.Responses
 {

@@ -1,6 +1,5 @@
-﻿using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
-using Microsoft.IdentityModel;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
+using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -34,7 +33,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
                 throw new SecurityTokenValidationException("Remote Token Validation Failed");
             }
         }
-        
+
         public bool TryValidateToken(string jwt, IKeycloakParameters options, OidcDataManager uriManager, out SecurityToken rToken)
         {
             try
@@ -67,7 +66,7 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
                 RequireSignedTokens = !options.AllowUnsignedTokens,
                 ValidIssuer = uriManager.GetIssuer(),
                 ClockSkew = options.TokenClockSkew,
-                ValidAudiences = new List<string> {"null", options.ClientId},
+                ValidAudiences = new List<string> { "null", options.ClientId },
                 IssuerSigningKeys = uriManager.GetJsonWebKeys().GetSigningKeys(),
                 AuthenticationType = options.AuthenticationType // Not used
             };
@@ -114,8 +113,8 @@ namespace Psy.Owin.Security.Keycloak.IdentityModel.Utilities
 
             if (validationParameters.ValidateIssuerSigningKey == false)
             {
-				return ReadToken(securityToken);
-			}
+                return ReadToken(securityToken);
+            }
 
             var jwt = ValidateSignature(securityToken, validationParameters);
 

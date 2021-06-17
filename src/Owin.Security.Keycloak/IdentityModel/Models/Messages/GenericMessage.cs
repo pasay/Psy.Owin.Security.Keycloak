@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Security.Authentication;
 using System.Threading.Tasks;
-using Psy.Owin.Security.Keycloak.IdentityModel.Models.Configuration;
 
 namespace Psy.Owin.Security.Keycloak.IdentityModel.Models.Messages
 {

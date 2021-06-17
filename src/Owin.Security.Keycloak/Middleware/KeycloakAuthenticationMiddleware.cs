@@ -1,9 +1,9 @@
-﻿using System;
-using Psy.Owin.Security.Keycloak.IdentityModel;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
 using Owin;
+using Psy.Owin.Security.Keycloak.IdentityModel;
+using System;
 
 namespace Psy.Owin.Security.Keycloak.Middleware
 {
@@ -76,7 +76,7 @@ namespace Psy.Owin.Security.Keycloak.Middleware
             }
 
             // Validate other options
-            
+
             if (Options.ForceBearerTokenAuth && !Options.EnableBearerTokenAuth)
                 Options.EnableBearerTokenAuth = true;
 
@@ -103,15 +103,13 @@ namespace Psy.Owin.Security.Keycloak.Middleware
 
         private void ThrowOptionNotFound(string optionName)
         {
-            var message =
-                $"KeycloakAuthenticationOptions [id:{Options.AuthenticationType}] : Required option '{optionName}' not set";
+            var message = $"KeycloakAuthenticationOptions [id:{Options.AuthenticationType}] : Required option '{optionName}' not set";
             throw new Exception(message);
         }
 
         private void ThrowInvalidOption(string optionName, Exception inner = null)
         {
-            var message =
-                $"KeycloakAuthenticationOptions [id:{Options.AuthenticationType}] : Provided option '{optionName}' is invalid";
+            var message = $"KeycloakAuthenticationOptions [id:{Options.AuthenticationType}] : Provided option '{optionName}' is invalid";
             throw inner == null ? new Exception(message) : new Exception(message, inner);
         }
     }
