@@ -1,3 +1,10 @@
+# Added Features
+> HS256 Security token validation error disabled property added.
+> 
+> Audience validation error disabled property added.
+
+
+----------------------------------------------------------------------------------
 # THIS PROJECT IS NO LONGER BEING MAINTAINED
 
 *Please use this project at your own risk. The software is provided as-is.*
