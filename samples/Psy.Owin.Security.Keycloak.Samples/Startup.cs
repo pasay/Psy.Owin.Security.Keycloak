@@ -28,9 +28,9 @@ namespace Psy.Owin.Security.Keycloak.Samples
             app.UseKeycloakAuthentication(new KeycloakAuthenticationOptions
             {
                 Realm = "master", //your realm name
-                ClientId = "sample_keycloakAuth", //your client id
-                ClientSecret = "3a06aae9-53d2-43a9-ba00-f188ff7b6d99", //your client secret
-                KeycloakUrl = "http://keycloak.site.com/auth", // your keycloak url adress
+                ClientId = "yourClientid", //your client id
+                ClientSecret = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee", //your client secret
+                KeycloakUrl = "http://www.yourkeycloak.com/auth/", // your keycloak url adress
 
                 SignInAsAuthenticationType = persistentAuthType,
                 AuthenticationType = persistentAuthType,
