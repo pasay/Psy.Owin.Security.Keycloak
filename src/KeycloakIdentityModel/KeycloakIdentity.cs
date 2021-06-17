@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security;
@@ -15,6 +15,7 @@ using KeycloakIdentityModel.Models.Responses;
 using KeycloakIdentityModel.Utilities;
 using KeycloakIdentityModel.Utilities.ClaimMapping;
 using Newtonsoft.Json.Linq;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace KeycloakIdentityModel
 {
@@ -51,7 +52,7 @@ namespace KeycloakIdentityModel
         /// <summary>
         ///     Gets a value that indicates whether the identity has been authenticated
         /// </summary>
-        public override bool IsAuthenticated => _kcClaims != null && _accessToken.ValidTo > DateTime.Now;
+        public override bool IsAuthenticated => _kcClaims != null && _accessToken.ValidTo > DateTime.UtcNow;
 
         /// <summary>
         ///     Gets a value that indicates whether the identity has been updated since its instantiation
@@ -80,6 +81,7 @@ namespace KeycloakIdentityModel
         public override void AddClaim(Claim claim)
         {
             if (claim == null) throw new ArgumentNullException(nameof(claim));
+
             _userClaims.Add(claim);
         }
 
@@ -91,6 +93,7 @@ namespace KeycloakIdentityModel
         public override void AddClaims(IEnumerable<Claim> claims)
         {
             if (claims == null) throw new ArgumentNullException(nameof(claims));
+
             _userClaims.AddRange(claims);
         }
 
@@ -102,6 +105,7 @@ namespace KeycloakIdentityModel
         public override void RemoveClaim(Claim claim)
         {
             if (claim == null) throw new ArgumentNullException(nameof(claim));
+
             if (!TryRemoveClaim(claim))
                 throw new InvalidOperationException();
         }
@@ -115,6 +119,7 @@ namespace KeycloakIdentityModel
         public override bool TryRemoveClaim(Claim claim)
         {
             if (claim == null) throw new ArgumentNullException(nameof(claim));
+
             return _userClaims.Remove(claim);
         }
 
@@ -164,11 +169,11 @@ namespace KeycloakIdentityModel
         /// <param name="parameters"></param>
         /// <param name="identity"></param>
         /// <returns></returns>
-        public static Task<KeycloakIdentity> ConvertFromClaimsIdentityAsync(IKeycloakParameters parameters,
-            ClaimsIdentity identity)
+        public static Task<KeycloakIdentity> ConvertFromClaimsIdentityAsync(IKeycloakParameters parameters, ClaimsIdentity identity)
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
             if (identity == null) throw new ArgumentNullException(nameof(identity));
+
             return ConvertFromClaimsAsync(parameters, identity.Claims);
         }
 
@@ -178,8 +183,7 @@ namespace KeycloakIdentityModel
         /// <param name="parameters"></param>
         /// <param name="claims"></param>
         /// <returns></returns>
-        public static Task<KeycloakIdentity> ConvertFromClaimsAsync(IKeycloakParameters parameters,
-            IEnumerable<Claim> claims)
+        public static Task<KeycloakIdentity> ConvertFromClaimsAsync(IKeycloakParameters parameters, IEnumerable<Claim> claims)
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
             if (claims == null) throw new ArgumentNullException(nameof(claims));
@@ -203,6 +207,7 @@ namespace KeycloakIdentityModel
         {
             if (parameters == null) throw new ArgumentNullException(nameof(parameters));
             if (message == null) throw new ArgumentNullException(nameof(message));
+
             return ConvertFromJwtAsync(parameters, message.AccessToken, message.RefreshToken, message.IdToken);
         }
 
@@ -221,6 +226,7 @@ namespace KeycloakIdentityModel
             if (baseUri == null) throw new ArgumentNullException(nameof(baseUri));
 
             response.ThrowIfError();
+
             var message = new RequestAccessTokenMessage(baseUri, parameters, response);
             return await ConvertFromTokenResponseAsync(parameters, await message.ExecuteAsync());
         }
@@ -370,8 +376,7 @@ namespace KeycloakIdentityModel
             }
             catch (Exception exception)
             {
-                throw new ArgumentException("Invalid Keycloak server parameters specified: See inner for server error",
-                    exception);
+                throw new ArgumentException("Invalid Keycloak server parameters specified: See inner for server error", exception);
             }
         }
 
@@ -379,14 +384,13 @@ namespace KeycloakIdentityModel
 
         #region Claim Generation Methods
 
-        protected IEnumerable<Claim> GenerateJwtClaims(JwtSecurityToken accessToken, JwtSecurityToken idToken,
-            JwtSecurityToken refreshToken)
+        protected IEnumerable<Claim> GenerateJwtClaims(JwtSecurityToken accessToken, JwtSecurityToken idToken, JwtSecurityToken refreshToken)
         {
             // Add generic claims
             yield return new Claim(Constants.ClaimTypes.AuthenticationType, _parameters.AuthenticationType);
             yield return new Claim(Constants.ClaimTypes.Version, Global.GetVersion());
 
-            // Save the recieved tokens as claims
+            // Save the received tokens as claims
             if (_idToken != null)
                 yield return new Claim(Constants.ClaimTypes.IdToken, _idToken.RawData);
             if (_accessToken != null)
@@ -397,25 +401,29 @@ namespace KeycloakIdentityModel
             // Add OIDC token claims
             var jsonId = _parameters.ClientId;
             if (_idToken != null)
-                foreach (
-                    var claim in ProcessOidcToken(idToken.GetPayloadJObject(), ClaimMappings.IdTokenMappings, jsonId))
+            {
+		        var claims = ProcessOidcToken(idToken.GetPayloadJObject(), ClaimMappings.IdTokenMappings, jsonId);
+                foreach (var claim in claims)
                     yield return claim;
+			}
+			
             if (_accessToken != null)
-                foreach (
-                    var claim in
-                        ProcessOidcToken(accessToken.GetPayloadJObject(), ClaimMappings.AccessTokenMappings, jsonId)
-                    )
+            {
+            	var claims = ProcessOidcToken(accessToken.GetPayloadJObject(), ClaimMappings.AccessTokenMappings, jsonId);
+                foreach (var claim in claims)
                     yield return claim;
+			}
+			
             if (_refreshToken != null)
-                foreach (
-                    var claim in
-                        ProcessOidcToken(refreshToken.GetPayloadJObject(), ClaimMappings.RefreshTokenMappings, jsonId))
-                    yield return claim;
+            {
+            	var claims = ProcessOidcToken(refreshToken.GetPayloadJObject(), ClaimMappings.RefreshTokenMappings, jsonId);
+                foreach (var claim in claims)
+                	yield return claim;
+			}            
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static IEnumerable<Claim> ProcessOidcToken(JObject webToken, IEnumerable<ClaimLookup> claimMappings,
-            string jsonId)
+        private static IEnumerable<Claim> ProcessOidcToken(JObject webToken, IEnumerable<ClaimLookup> claimMappings, string jsonId)
         {
             // Process claim mappings
             return claimMappings.SelectMany(lookupClaim => lookupClaim.ProcessClaimLookup(webToken, jsonId));
@@ -427,7 +435,7 @@ namespace KeycloakIdentityModel
 
         private IEnumerable<Claim> GetCurrentClaims()
         {
-            return _kcClaims.Concat(_userClaims);
+            return _kcClaims?.Concat(_userClaims);
         }
 
         private async Task<IEnumerable<Claim>> GetClaimsAsync()
@@ -462,7 +470,9 @@ namespace KeycloakIdentityModel
             var tokenHandler = new KeycloakTokenHandler();
             var uriManager = await OidcDataManager.GetCachedContextAsync(_parameters);
 
-            SecurityToken accessSecurityToken, idSecurityToken = null, refreshSecurityToken = null;
+            SecurityToken accessSecurityToken = null;
+            SecurityToken idSecurityToken = null;
+            SecurityToken refreshSecurityToken = null;
 
             if (_parameters.UseRemoteTokenValidation)
             {
@@ -484,8 +494,12 @@ namespace KeycloakIdentityModel
 
             // Save to this object
             // TODO: Convert to MS claims parsing in token handler
-            _kcClaims = GenerateJwtClaims(accessSecurityToken as JwtSecurityToken, idSecurityToken as JwtSecurityToken,
-                refreshSecurityToken as JwtSecurityToken);
+			_kcClaims = GenerateJwtClaims(
+			    accessSecurityToken as JwtSecurityToken,
+			    idSecurityToken as JwtSecurityToken,
+			    refreshSecurityToken as JwtSecurityToken
+			);
+
             _idToken = idSecurityToken as JwtSecurityToken;
             _accessToken = accessSecurityToken as JwtSecurityToken;
             _refreshToken = refreshSecurityToken as JwtSecurityToken;
@@ -493,9 +507,10 @@ namespace KeycloakIdentityModel
 
         protected async Task RefreshIdentity(string refreshToken)
         {
-            var respMessage =
-                        await new RefreshAccessTokenMessage(_parameters, refreshToken).ExecuteAsync();
+            var respMessage = await new RefreshAccessTokenMessage(_parameters, refreshToken).ExecuteAsync();
+
             await CopyFromJwt(respMessage.AccessToken, respMessage.RefreshToken, respMessage.IdToken);
+
             IsTouched = true;
         }
 

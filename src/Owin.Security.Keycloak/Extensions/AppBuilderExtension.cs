@@ -1,4 +1,5 @@
 ﻿using Owin.Security.Keycloak.Middleware;
+using Owin;
 
 namespace Owin.Security.Keycloak
 {

@@ -34,10 +34,10 @@ namespace KeycloakIdentityModel.Utilities.ClaimMapping
                     break;
 
                 case JTokenType.Object:
-                    foreach (
-                        var claim in
-                            ((JObject) jsonToken).Children().SelectMany(GenerateClaims))
-                        yield return claim;
+                    foreach (var claim in ((JObject) jsonToken).Children().SelectMany(GenerateClaims))
+                    {    
+                    	yield return claim;
+                    }	
                     break;
 
                 default:

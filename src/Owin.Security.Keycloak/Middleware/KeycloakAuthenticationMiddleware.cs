@@ -3,6 +3,7 @@ using KeycloakIdentityModel;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
+using Owin;
 
 namespace Owin.Security.Keycloak.Middleware
 {
@@ -28,10 +29,7 @@ namespace Owin.Security.Keycloak.Middleware
             // Check to ensure authentication type isn't already used
             var authType = Options.AuthenticationType;
             if (!Global.KeycloakOptionStore.TryAdd(authType, Options))
-            {
-                throw new Exception(
-                    $"KeycloakAuthenticationOptions: Authentication type '{authType}' already used; required unique");
-            }
+                throw new Exception($"KeycloakAuthenticationOptions: Authentication type '{authType}' already used; required unique");
 
             // Verify required options
             if (Options.KeycloakUrl == null)
