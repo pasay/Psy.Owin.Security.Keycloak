@@ -28,6 +28,9 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <PackageIcon>images/icon.png</PackageIcon>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -144,4 +147,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="Pack">
+  </Target>
 </Project>

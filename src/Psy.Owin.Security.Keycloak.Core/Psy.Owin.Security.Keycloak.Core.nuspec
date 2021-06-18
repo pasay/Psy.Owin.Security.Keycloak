@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<icon>images\icon.png</icon>
+	</metadata>
+	<files>
+		<file src="..\icon.png" target="images\" />
+	</files>
+	<dependencies>
+		<dependency id="Microsoft.IdentityModel.JsonWebTokens" version="6.11.1" />
+		<dependency id="Microsoft.IdentityModel.Logging" version="6.11.1" />
+		<dependency id="Microsoft.IdentityModel.Protocol.Extensions" version="1.0.4.403061554" />
+		<dependency id="Microsoft.IdentityModel.Tokens" version="6.11.1" />
+		<dependency id="Microsoft.Owin" version="4.2.0" />
+		<dependency id="Microsoft.Owin.Security" version="4.2.0" />
+		<dependency id="Newtonsoft.Json" version="13.0.1" />
+		<dependency id="Owin" version="1.0" />
+		<dependency id="System.IdentityModel.Tokens.Jwt" version="6.11.1" />
+	</dependencies>
+</package>
