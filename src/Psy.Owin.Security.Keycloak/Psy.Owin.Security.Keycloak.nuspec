@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>$id$</id>
+		<version>$version$</version>
+		<title>$title$</title>
+		<authors>Pasa YAZICI</authors>
+		<owners>Dylan Plecki</owners>
+		<projectUrl>
+			https://github.com/pasay/Psy.Owin.Security.Keycloak
+		</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<summary></summary>
+		<description>$description$</description>
+		<releaseNotes>
+			See https://github.com/dylanplecki/KeycloakOwinAuthentication/releases
+		</releaseNotes>
+		<copyright>Copyright 2021</copyright>
+		<tags>owin keycloak identitymodel identity model authentication</tags>
+		<dependencies>
+			<dependency id="Microsoft.IdentityModel.JsonWebTokens" version="6.11.1" />
+			<dependency id="Microsoft.IdentityModel.Logging" version="6.11.1" />
+			<dependency id="Microsoft.IdentityModel.Protocol.Extensions" version="1.0.4.403061554" />
+			<dependency id="Microsoft.IdentityModel.Tokens" version="6.11.1" />
+			<dependency id="Microsoft.Owin" version="4.2.0" />
+			<dependency id="Microsoft.Owin.Security" version="4.2.0" />
+			<dependency id="Newtonsoft.Json" version="13.0.1" />
+			<dependency id="Owin" version="1.0" />
+			<dependency id="System.IdentityModel.Tokens.Jwt" version="6.11.1" />
+		</dependencies>
+	</metadata>
+</package>
